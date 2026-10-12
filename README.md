@@ -9,8 +9,10 @@ compatible) does the Bluetooth part. The Switch talks to it over a USB cable.
 
 ```
 Switch ──USB cable──▶ nice!nano ──Bluetooth LE──▶ Mac: "Xbox Wireless Controller"
- (NX Joybridge app)       (xbox_bridge firmware)
+ (NX Joybridge app)    (xbox_bridge firmware)
 ```
+
+![Switch Lite running NX Joybridge, connected by USB-C cable to a nice!nano board](docs/images/setup.jpg)
 
 ## Status
 
@@ -20,6 +22,8 @@ Working, tested with:
 - nice!nano clone (nRF52840, UF2 bootloader 0.6.0, SoftDevice S140 6.1.1)
 - macOS 27; recognised by Apple's GameController framework as an Xbox controller,
   works on gamepad-tester sites and in World of Warcraft (retail)
+
+![The Mac's browser sees an "Xbox Wireless Controller" on hardwaretester.com/gamepad](docs/images/gamepad-tester.jpg)
 
 Every control maps through, including both analog sticks and the Xbox button.
 Other operating systems should see an ordinary Bluetooth Xbox controller, but are
@@ -55,8 +59,13 @@ A cheap nRF52840 board imitating an Xbox controller solves both.
    Mac's USB or the Switch.
 3. **Install NX Joybridge on the Switch** ([build it](#switch-app)): copy
    `nx-joybridge.nro` to `/switch/` on the SD card.
+
+   ![NX Joybridge in the Homebrew Menu](docs/images/homebrew-menu.jpg)
+
 4. **Play:** start NX Joybridge from the Homebrew Menu and plug the board into the
    Switch. The status screen shows the USB link and the Bluetooth connection.
+
+   ![The NX Joybridge status screen with USB and Bluetooth connected](docs/images/app-screen.jpg)
 
 ### NX Joybridge controls
 
