@@ -61,7 +61,7 @@ Firmware: `nicenano/xbox_bridge/` (started as a test-pattern-only build).
 
 ## 5. Direct USB from the Switch (works)
 
-App: `switch_app/` (NX Remote). A normal homebrew app can be a USB host through
+App: `switch_app/` (NX Joybridge). A normal homebrew app can be a USB host through
 libnx `usbHs` (official example: `examples/switch/usb/usbhs` in devkitPro), as long
 as no system module has claimed the device. The nice!nano's USB serial data
 interface is unclaimed, so the app acquires it, opens its bulk endpoints and

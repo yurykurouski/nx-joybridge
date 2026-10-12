@@ -38,7 +38,7 @@ include $(DEVKITPRO)/libnx/switch_rules
 #   NACP building is skipped as well.
 #---------------------------------------------------------------------------------
 APP_TITLE	:=	BLE Spike
-APP_AUTHOR	:=	nx-remote contributors
+APP_AUTHOR	:=	nx-joybridge contributors
 APP_VERSION	:=	0.1.0
 
 TARGET		:=	switch-ble-spike

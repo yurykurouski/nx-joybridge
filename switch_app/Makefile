@@ -37,11 +37,11 @@ include $(DEVKITPRO)/libnx/switch_rules
 #   of a homebrew executable (.nro). This is intended to be used for sysmodules.
 #   NACP building is skipped as well.
 #---------------------------------------------------------------------------------
-APP_TITLE	:=	NX Remote
-APP_AUTHOR	:=	nx-remote contributors
+APP_TITLE	:=	NX Joybridge
+APP_AUTHOR	:=	nx-joybridge contributors
 APP_VERSION	:=	0.3.0
 
-TARGET		:=	nx-remote
+TARGET		:=	nx-joybridge
 BUILD		:=	build
 SOURCES		:=	source
 DATA		:=	data

@@ -1,6 +1,6 @@
 # Third-party notices
 
-nx-remote is MIT licensed (see `LICENSE`). It contains or builds on the
+nx-joybridge is MIT licensed (see `LICENSE`). It contains or builds on the
 following third-party work.
 
 ## Included in this repository
@@ -58,7 +58,7 @@ distribute prebuilt binaries, include their notices:
 
 | Binary | Component | License |
 |--------|-----------|---------|
-| `nx-remote.nro`, BLE spike `.nro` | [libnx](https://github.com/switchbrew/libnx) | ISC |
+| `nx-joybridge.nro`, BLE spike `.nro` | [libnx](https://github.com/switchbrew/libnx) | ISC |
 | `xbox_bridge.uf2` | [Adafruit nRF52 Arduino core](https://github.com/adafruit/Adafruit_nRF52_Arduino) | LGPL-2.1 (core), with MIT-licensed libraries such as Bluefruit and TinyUSB |
 | `xbox_bridge.uf2` | Nordic SoftDevice S140 | Nordic license; already on the board with its bootloader, not part of the `.uf2` built here |
 

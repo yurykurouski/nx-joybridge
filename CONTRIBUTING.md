@@ -11,7 +11,7 @@ Please include:
 - board (nice!nano, clone, other nRF52840) and the contents of `INFO_UF2.TXT`
 - computer and OS version
 - which mode (direct USB, Wi-Fi, keyboard)
-- `/switch/nx-remote.log` from the SD card, and a photo of the NX Remote screen if
+- `/switch/nx-joybridge.log` from the SD card, and a photo of the NX Joybridge screen if
   something looks wrong
 - for the Mac side: output of `nicenano/check_gamecontroller 20` and
   `python3 receiver/bridge_cmd.py ping`

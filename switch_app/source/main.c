@@ -1,4 +1,4 @@
-// NX Remote: Switch Lite -> USB -> nice!nano -> Bluetooth LE Xbox controller.
+// NX Joybridge: Switch Lite -> USB -> nice!nano -> Bluetooth LE Xbox controller.
 //
 // Reads the Lite's own controls and sends the bridge's Xbox report frames
 // (docs/BRIDGE.md) to a nice!nano running nicenano/xbox_bridge, over USB with
@@ -7,7 +7,7 @@
 // Threads:
 //   worker  - USB discovery, pad polling every ~4 ms, sending reports
 //   main    - status screen (fixed lines, no scrolling), quit handling
-// Every setup step is also logged to sdmc:/switch/nx-remote.log.
+// Every setup step is also logged to sdmc:/switch/nx-joybridge.log.
 //
 // Hold + and - together for 1 second to quit.
 
@@ -20,7 +20,7 @@
 #include "xbox_report.h"
 
 #define BRIDGE_VID        0x239A          // Adafruit USB IDs used by the bridge firmware
-#define LOG_PATH          "sdmc:/switch/nx-remote.log"
+#define LOG_PATH          "sdmc:/switch/nx-joybridge.log"
 #define POLL_NS           (4ULL * 1000000)
 #define KEEPALIVE_NS      (150ULL * 1000000)
 #define PING_NS           (2000ULL * 1000000)
@@ -472,7 +472,7 @@ static void draw(const UiExtra *ex) {
     TimeCalendarAdditionalInfo cinfo;
     bool clock_ok = R_SUCCEEDED(timeGetCurrentTime(TimeType_Default, &ts)) &&
                     R_SUCCEEDED(timeToCalendarTimeWithMyRule(ts, &ct, &cinfo));
-    at(2, 3, FG_CYAN, "NX REMOTE");
+    at(2, 3, FG_CYAN, "NX JOYBRIDGE");
     at(3, 3, FG_GREY, "Switch Lite -> USB -> nice!nano -> Bluetooth");
     if (clock_ok) at(2, 55, FG_WHITE, "%02u:%02u", ct.hour, ct.minute);
     else          at(2, 55, FG_GREY, "--:--");
@@ -554,7 +554,7 @@ int main(int argc, char **argv) {
     strcpy(g.usb_msg, "starting...");
 
     g_log = fopen(LOG_PATH, "w");
-    logf_("NX Remote start, HOS %u.%u.%u", HOSVER_MAJOR(hosversionGet()), HOSVER_MINOR(hosversionGet()),
+    logf_("NX Joybridge start, HOS %u.%u.%u", HOSVER_MAJOR(hosversionGet()), HOSVER_MINOR(hosversionGet()),
           HOSVER_MICRO(hosversionGet()));
 
     Result rc = appletSetAutoSleepDisabled(true);   // the Lite is used as a controller, keep it awake
@@ -570,7 +570,7 @@ int main(int argc, char **argv) {
     rc = usbHsInitialize();
     logf_("usbHsInitialize: rc=0x%X", rc);
     if (R_FAILED(rc)) {
-        at(2, 3, FG_RED, "NX Remote: usbHsInitialize failed, rc=0x%X", rc);
+        at(2, 3, FG_RED, "NX Joybridge: usbHsInitialize failed, rc=0x%X", rc);
         at(4, 3, FG_WHITE, "The USB host service is not available to this app. Press + to quit.");
         consoleUpdate(NULL);
         PadState pad;
@@ -664,7 +664,7 @@ int main(int argc, char **argv) {
     }
     if (psm_ok) psmExit();
     appletSetAutoSleepDisabled(false);
-    logf_("NX Remote exit");
+    logf_("NX Joybridge exit");
     if (g_log) fclose(g_log);
     consoleExit(NULL);
     return 0;

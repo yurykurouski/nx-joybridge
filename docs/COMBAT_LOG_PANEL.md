@@ -1,4 +1,4 @@
-# Plan: WoW combat-log panel on NX Remote
+# Plan: WoW combat-log panel on NX Joybridge
 
 **Status:** planned, not started.
 
@@ -26,7 +26,7 @@ latency-critical.
 ## Architecture
 
 ```
-WoW ──/combatlog──▶ Logs/WoWCombatLog*.txt ──follow──▶ Mac: companion/wow_stats.py ──UDP over Wi-Fi──▶ NX Remote "WoW" panel
+WoW ──/combatlog──▶ Logs/WoWCombatLog*.txt ──follow──▶ Mac: companion/wow_stats.py ──UDP over Wi-Fi──▶ NX Joybridge "WoW" panel
                                                          (parse + aggregate)                              (Switch Lite)
 ```
 
@@ -67,7 +67,7 @@ NXWOW1 combat=1 t=83.2 enc=Boss_Name dps=12345 sdps=9876 hps=0 dtps=2100 hp=76 k
 - Spaces in values encoded as `_`; at most 512 bytes.
 - No acknowledgement. The panel greys out after 5 s without packets.
 
-### 3. NX Remote changes
+### 3. NX Joybridge changes
 
 - Start the network service and a third thread that listens on UDP 8194
   (non-blocking), parses packets into shared state.
@@ -99,7 +99,7 @@ switch it on automatically with `LoggingCombat(true)`; existing addons do this
 2. **Replay tool:** feeds a recorded log into the companion at real speed, so the
    whole chain can be tested without playing.
 3. **Sender** with `--switch IP`.
-4. **NX Remote:** network, listener thread, panel, Switch IP display; tested with
+4. **NX Joybridge:** network, listener thread, panel, Switch IP display; tested with
    the replay tool.
 5. **Live test** in game, solo and in a dungeon; measure how far behind the panel is.
 6. **Docs:** README usage, update `docs/FINDINGS.md` with the measured latency.

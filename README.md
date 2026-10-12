@@ -1,4 +1,4 @@
-# nx-remote
+# nx-joybridge
 
 Use a homebrew Nintendo Switch (tested on a Switch Lite) as a Bluetooth game
 controller for a Mac. The Mac sees a standard **Xbox Wireless Controller**, so
@@ -9,7 +9,7 @@ compatible) does the Bluetooth part. The Switch talks to it over a USB cable.
 
 ```
 Switch ──USB cable──▶ nice!nano ──Bluetooth LE──▶ Mac: "Xbox Wireless Controller"
- (NX Remote app)       (xbox_bridge firmware)
+ (NX Joybridge app)       (xbox_bridge firmware)
 ```
 
 ## Status
@@ -53,12 +53,12 @@ A cheap nRF52840 board imitating an Xbox controller solves both.
 2. **Pair it with the Mac:** System Settings → Bluetooth →
    "Xbox Wireless Controller" → Connect. The board needs power for this, from the
    Mac's USB or the Switch.
-3. **Install NX Remote on the Switch** ([build it](#switch-app)): copy
-   `nx-remote.nro` to `/switch/` on the SD card.
-4. **Play:** start NX Remote from the Homebrew Menu and plug the board into the
+3. **Install NX Joybridge on the Switch** ([build it](#switch-app)): copy
+   `nx-joybridge.nro` to `/switch/` on the SD card.
+4. **Play:** start NX Joybridge from the Homebrew Menu and plug the board into the
    Switch. The status screen shows the USB link and the Bluetooth connection.
 
-### NX Remote controls
+### NX Joybridge controls
 
 - All Switch controls are sent as the matching Xbox controls, by position
   (Switch B = Xbox A, A = B, Y = X, X = Y). See [docs/BRIDGE.md](docs/BRIDGE.md).
@@ -68,7 +68,7 @@ A cheap nRF52840 board imitating an Xbox controller solves both.
 - Hold **+** and **−** together for 1 second to quit. The Mac sees Menu + View
   for that second, then neutral.
 - The screen shows the clock, battery, link status, reports per second and a live
-  view of the controls. Setup steps are logged to `/switch/nx-remote.log`.
+  view of the controls. Setup steps are logged to `/switch/nx-joybridge.log`.
 
 ## Other modes
 
@@ -132,11 +132,11 @@ Re-flashing later doesn't need the reset button: with the board on the Mac's USB
 Requires [devkitPro](https://devkitpro.org/wiki/Getting_Started) with `switch-dev`:
 
 ```sh
-cd switch_app && make          # -> nx-remote.nro
+cd switch_app && make          # -> nx-joybridge.nro
 ```
 
 To skip the SD card: open the Homebrew Menu, press **Y** (NetLoader), then
-`$DEVKITPRO/tools/bin/nxlink -a <switch-ip> nx-remote.nro`.
+`$DEVKITPRO/tools/bin/nxlink -a <switch-ip> nx-joybridge.nro`.
 
 ### Tests
 
@@ -163,7 +163,7 @@ receives: `swiftc -O nicenano/check_gamecontroller.swift -o check_gamecontroller
 
 ## No piracy
 
-nx-remote is homebrew for a console you own and have modified yourself. It is an
+nx-joybridge is homebrew for a console you own and have modified yourself. It is an
 input device and nothing else. It contains no Nintendo code, keys, firmware or
 game data, and it does not:
 
@@ -190,14 +190,14 @@ Issues and pull requests about any of these will be closed.
 
 | Path | What it is |
 |------|------------|
-| `switch_app/` | NX Remote, the Switch homebrew app (C, libnx) |
+| `switch_app/` | NX Joybridge, the Switch homebrew app (C, libnx) |
 | `nicenano/xbox_bridge/` | Bridge firmware: Xbox controller over Bluetooth LE, input from USB serial |
 | `nicenano/check_gamecontroller.swift` | Shows what macOS's GameController framework sees |
 | `receiver/` | Mac receiver for NXInput (Wi-Fi and keyboard modes), bridge tools, tests |
 | `docs/BRIDGE.md` | Bridge serial protocol, report layout, button mapping, failsafes |
 | `docs/PROTOCOL.md` | NXInput's network protocol |
 | `docs/FINDINGS.md` | What was tried and why the dead ends failed |
-| `docs/COMBAT_LOG_PANEL.md` | Plan: WoW combat stats on the NX Remote screen |
+| `docs/COMBAT_LOG_PANEL.md` | Plan: WoW combat stats on the NX Joybridge screen |
 | `experiments/switch-ble-spike/` | Dead end kept for reference: the Switch as a Bluetooth LE peripheral |
 
 ## Roadmap

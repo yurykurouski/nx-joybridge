@@ -11,7 +11,7 @@ controller.
 Two programs speak this protocol to the bridge:
 
 - `receiver/nxinput_receiver.py --gamepad` on the Mac (Wi-Fi mode), over the Mac's USB serial port.
-- `switch_app/` (NX Remote) on the Switch (direct USB mode). The Lite is the USB host;
+- `switch_app/` (NX Joybridge) on the Switch (direct USB mode). The Lite is the USB host;
   the app claims the nice!nano's CDC data interface with libnx `usbHs`, writes frames
   to its bulk OUT endpoint, and raises DTR so the bridge's status replies come back.
   Its C mapping is checked byte-for-byte against the Python one (`switch_app/tests/crosscheck.py`).
@@ -87,7 +87,7 @@ Real Switch Lite (NXInput over Wi-Fi, same chain): face buttons, ZL/ZR as full
 triggers, L/R (also held together), −/+, both stick clicks, all four d-pad directions and both sticks
 (full circles with smooth analog values) arrived at GameController.
 
-Direct USB mode (NX Remote app on the Lite, USB-C to USB-C cable to the nice!nano,
+Direct USB mode (NX Joybridge app on the Lite, USB-C to USB-C cable to the nice!nano,
 nothing running on the Mac): A/B/X/Y, L/R, ZL/ZR, −/+, both stick clicks, all four
 d-pad directions and both sticks arrived at GameController.
 

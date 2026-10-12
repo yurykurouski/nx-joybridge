@@ -12,7 +12,7 @@ typedef struct {
     bool l, r, zl, zr;
     bool minus, plus, stick_l, stick_r;
     bool up, down, left, right; // d-pad
-    bool home;                  // Xbox button (NX Remote: on-screen touch button)
+    bool home;                  // Xbox button (NX Joybridge: on-screen touch button)
     int32_t lx, ly, rx, ry;     // sticks, -32767..32767, +y = up (libnx convention)
 } SwitchInput;
 

@@ -26,7 +26,7 @@ BUTTON_BITS = {
     "r": 0x0080,        # RB
     "minus": 0x0400,    # View
     "plus": 0x0800,     # Menu
-    "home": 0x1000,     # Xbox button (not sent by NXInput; NX Remote has a touch button)
+    "home": 0x1000,     # Xbox button (not sent by NXInput; NX Joybridge has a touch button)
     "stick_l": 0x2000,  # left stick click
     "stick_r": 0x4000,  # right stick click
 }
