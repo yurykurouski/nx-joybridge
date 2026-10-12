@@ -1,0 +1,2 @@
+pynput>=1.7     # keyboard mode only
+pyserial>=3.5   # gamepad mode and bridge_cmd.py

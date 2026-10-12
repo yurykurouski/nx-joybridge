@@ -1,0 +1,26 @@
+# macOS
+.DS_Store
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Switch homebrew build output (devkitPro)
+build/
+*.elf
+*.nacp
+*.nro
+*.nso
+*.pfs0
+
+# nice!nano firmware build output
+nicenano/**/build/
+*.uf2
+*.UF2
+
+# Local tools compiled from source
+nicenano/check_gamecontroller
+
+# Personal firmware backups (kept on disk, not in git)
+backup/
