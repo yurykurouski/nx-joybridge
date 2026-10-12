@@ -1,0 +1,82 @@
+name: release
+
+# Push a tag like v0.3.0 to build everything and publish a GitHub release.
+# "Run workflow" in the Actions tab builds the same files without releasing.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  switch-app:
+    runs-on: ubuntu-latest
+    container: devkitpro/devkita64
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build nx-joybridge.nro
+        working-directory: switch_app
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          [ "${GITHUB_REF_TYPE}" = tag ] || VERSION="$(sed -n 's/^APP_VERSION[[:space:]]*:=[[:space:]]*//p' Makefile)"
+          make APP_VERSION="$VERSION"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nx-joybridge.nro
+          path: switch_app/nx-joybridge.nro
+          if-no-files-found: error
+
+  firmware:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: arduino/setup-arduino-cli@v2
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install the Adafruit nRF52 core
+        run: |
+          arduino-cli config add board_manager.additional_urls \
+            https://adafruit.github.io/arduino-board-index/package_adafruit_index.json
+          arduino-cli core update-index
+          arduino-cli core install adafruit:nrf52
+
+      # Same steps as "nice!nano firmware" in the README.
+      - name: Build xbox_bridge.uf2
+        run: |
+          FW=nicenano/xbox_bridge
+          arduino-cli compile --fqbn adafruit:nrf52:feather52840 --output-dir $FW/build $FW
+          UF2CONV=$(ls "$(arduino-cli config get directories.data)"/packages/adafruit/hardware/nrf52/*/tools/uf2conv/uf2conv.py | tail -1)
+          python3 "$UF2CONV" -f 0xADA52840 -c -o $FW/build/xbox_bridge.uf2 $FW/build/xbox_bridge.ino.hex
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: xbox_bridge.uf2
+          path: nicenano/xbox_bridge/build/xbox_bridge.uf2
+          if-no-files-found: error
+
+  release:
+    if: github.ref_type == 'tag'
+    needs: [switch-app, firmware]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sha256sum dist/* | sed 's# dist/#  #' > dist/SHA256SUMS.txt
+          gh release create "$GITHUB_REF_NAME" dist/* \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "$GITHUB_REF_NAME" \
+            --generate-notes

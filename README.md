@@ -51,6 +51,9 @@ A cheap nRF52840 board imitating an Xbox controller solves both.
 
 ## Quick start
 
+Pre-built `xbox_bridge.uf2` and `nx-joybridge.nro` are attached to each
+[release](../../releases); you only need to build from source to change the code.
+
 1. **Flash the board** with the bridge firmware ([build it](#nicenano-firmware)).
    Double-tap its reset button so the `NICENANO` drive appears, then copy
    `xbox_bridge.uf2` onto it. The board reboots by itself.
