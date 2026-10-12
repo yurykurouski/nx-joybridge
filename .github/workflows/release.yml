@@ -43,7 +43,9 @@ jobs:
           arduino-cli config add board_manager.additional_urls \
             https://adafruit.github.io/arduino-board-index/package_adafruit_index.json
           arduino-cli core update-index
-          arduino-cli core install adafruit:nrf52
+          arduino-cli core install adafruit:nrf52@1.7.0
+          # The core's post-build step packages the DFU zip with this tool.
+          python3 -m pip install adafruit-nrfutil
 
       # Same steps as "nice!nano firmware" in the README.
       - name: Build xbox_bridge.uf2
